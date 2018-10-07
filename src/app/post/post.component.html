@@ -1,0 +1,10 @@
+<div [ngClass]="{ 'col-xs-12' : true,
+'list-group-item-success': postLoveIts >= 0,
+'list-group-item-danger': postLoveIts < 0 }">
+	<h2 class="d-inline">{{postTitle}}</h2>
+	<p class="d-inline">{{ postCreatedAt | date: 'short' }}</p>
+	<p class="font">{{postContent}}</p>
+	<app-post-list-item></app-post-list-item>
+</div>
+
+
