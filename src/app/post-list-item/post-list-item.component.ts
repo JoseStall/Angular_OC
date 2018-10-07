@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-post-list-item',
@@ -6,20 +6,21 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./post-list-item.component.scss']
 })
 export class PostListItemComponent implements OnInit {
+	@Input() postTitle: string;
+	@Input() postContent: string;
+	@Input() postCreatedAt: Date;
+	@Input() postLoveIts: number;
 
 	constructor() { }
 
 	ngOnInit() {}
-
-	loveIt() {
-		var like = 0;
-		var dislike = 0;
-		var coloredLike = like - dislike ;
-		return (coloredLike >= 0 ? true : false)
-	};
-	likeIt() {
+	onLike() {
+		console.log('on allume');
+		this.postLoveIts ++;
 	}
-	dislikeIt() {
+	onDislike() {
+		console.log('on éteint')
+		this.postLoveIts --;
 	}
 
 }
