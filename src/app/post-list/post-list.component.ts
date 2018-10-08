@@ -10,7 +10,6 @@ export class PostListComponent implements OnInit {
 	@Input() postContent: string;
 	@Input() postCreatedAt: Date;
 	@Input() postLoveIts: number;
-	@Input() lesposts;
 
 
 	constructor() {}
