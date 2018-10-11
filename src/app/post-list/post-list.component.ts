@@ -1,18 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PostService } from '../services/post.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-post-list',
 	templateUrl: './post-list.component.html',
 	styleUrls: ['./post-list.component.scss']
 })
+
 export class PostListComponent implements OnInit {
-	@Input() postTitle: string;
-	@Input() postContent: string;
-	@Input() postCreatedAt: Date;
-	@Input() postLoveIts: number;
+	posts: any[];
+	postSubscription: Subscription;
 
+	constructor(private postService: PostService) {}
 
-	constructor() {}
-
-	ngOnInit() {}
+	ngOnInit() {
+		this.postSubscription = this.postService.postsSubject.subscribe(
+			(posts: any[]) => {
+				this.posts = posts;
+			}
+		);
+		this.postService.emitPostSubject();
+	}
 }

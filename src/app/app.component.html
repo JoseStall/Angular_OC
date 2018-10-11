@@ -1,15 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<app-header></app-header>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<h1>
-				Bienvenue sur {{ title }}!
-			</h1>
-
 			<ul class="list-group">
-				<app-post-list [lesposts]="posts"></app-post-list>
+				<router-outlet></router-outlet>
 			</ul>
-
 		</div>
 	</div>
 </div>
