@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PostService } from '../services/post.service';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { PostsService } from '../services/posts.service';
 import { Subscription } from 'rxjs';
+import { Post } from '../models/Post.model'
+import { Router } from '@angular/router';
+
 
 @Component({
 	selector: 'app-post-list',
@@ -8,18 +11,41 @@ import { Subscription } from 'rxjs';
 	styleUrls: ['./post-list.component.scss']
 })
 
-export class PostListComponent implements OnInit {
-	posts: any[];
-	postSubscription: Subscription;
+export class PostListComponent implements OnInit, OnDestroy {
+	posts: Post[];
+	postsSubscription: Subscription;
+	@Input() postLoveIts: number;
 
-	constructor(private postService: PostService) {}
+
+	constructor(private postsService: PostsService, private router: Router) { }
 
 	ngOnInit() {
-		this.postSubscription = this.postService.postsSubject.subscribe(
-			(posts: any[]) => {
+		this.postsSubscription = this.postsService.postsSubject.subscribe(
+			(posts: Post[]) => {
 				this.posts = posts;
 			}
 		);
-		this.postService.emitPostSubject();
+		this.postsService.emitPosts();
+	}
+	onNewPost() {
+		this.router.navigate(['/posts', 'new']);
+	}
+
+	onDeletePost(post: Post) {
+		this.postsService.removePost(post);
+	}
+
+	onViewPost(id: number) {
+		this.router.navigate(['/posts', 'view', id]);
+	}
+
+	ngOnDestroy() {
+		this.postsSubscription.unsubscribe();
+	}
+	onLike(index) {
+		this.posts[index].loveIts++;
+	}
+	onDislike(index) {
+		this.posts[index].loveIts--;
 	}
 }

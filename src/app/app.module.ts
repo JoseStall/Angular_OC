@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostListItemComponent } from './post-list-item/post-list-item.component';
-import { PostService } from './services/post.service';
+import { PostsService } from './services/posts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -20,10 +20,12 @@ import { PostFormComponent } from './post-list/post-form/post-form.component';
 
 
 const appRoutes: Routes = [
-  { path: 'posts', canActivate: [AuthGuardService], component: PostListItemComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },  
-  { path: '', component: PostListItemComponent },
+  { path: 'posts', canActivate: [AuthGuardService], component: PostListComponent },
+  { path: 'posts/new', canActivate: [AuthGuardService], component: PostFormComponent },
+  { path: 'posts/view/:id', canActivate: [AuthGuardService], component: SinglePostComponent },
+  { path: '', component: PostListComponent },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
 ]
@@ -48,7 +50,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    PostService,
+    PostsService,
     AuthGuardService,
     AuthService,
   ],

@@ -6,19 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
 	styleUrls: ['./post-list-item.component.scss']
 })
 export class PostListItemComponent implements OnInit {
-	@Input() postTitle: string;
-	@Input() postContent: string;
-	@Input() postCreatedAt: Date;
-	@Input() postLoveIts: number;
+
 
 	constructor() { }
 
 	ngOnInit() {}
-	onLike() {
-		this.postLoveIts ++;
-	}
-	onDislike() {
-		this.postLoveIts --;
-	}
-
 }
