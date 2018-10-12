@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Post } from '../models/post.model';
 import * as firebase from 'firebase';
+import { Post } from '../models/Post.model'
 
 
 

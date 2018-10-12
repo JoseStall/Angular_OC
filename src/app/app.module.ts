@@ -14,7 +14,6 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { SinglePostComponent } from './post-list/single-post/single-post.component';
 import { PostFormComponent } from './post-list/post-form/post-form.component';
 
 
@@ -24,8 +23,7 @@ const appRoutes: Routes = [
   { path: 'auth/signin', component: SigninComponent },  
   { path: 'posts', canActivate: [AuthGuardService], component: PostListComponent },
   { path: 'posts/new', canActivate: [AuthGuardService], component: PostFormComponent },
-  { path: 'posts/view/:id', canActivate: [AuthGuardService], component: SinglePostComponent },
-  { path: '', component: PostListComponent },
+  { path: '', component: SigninComponent },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
 ]
@@ -39,7 +37,6 @@ const appRoutes: Routes = [
     FourOhFourComponent,
     SignupComponent,
     SigninComponent,
-    SinglePostComponent,
     PostFormComponent
   ],
   imports: [
